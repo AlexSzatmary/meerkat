@@ -2,6 +2,7 @@ import os
 import cloud.serialization.cloudpickle as cloudpickle
 import pickle
 import imp
+import sys
 
 
 def combine(*args):
@@ -30,10 +31,10 @@ def pre_load(module):
 
 
 def load(module_path, suffix=None):
+    sys.path.insert(0, os.path.dirname(module_path))
     module_name = os.path.splitext(os.path.basename(module_path))[0]
     (hin, p, t) = imp.find_module(module_name, [os.path.dirname(module_path)])
     module = imp.load_module(module_name, hin, p, t)
-
     if suffix is None:
         suffix = module.default_suffix
     pre_load(module)
