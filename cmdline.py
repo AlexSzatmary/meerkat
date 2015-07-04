@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import argparse
 import sys
 sys.path.insert(0, '..')
 import imp
@@ -8,12 +9,24 @@ import re
 import meercat
 
 
+def make_argparser():
+    a = argparse.ArgumentParser()
+    a.add_argument('--rm', action='store_true')
+    a.add_argument('fromx', metavar='from')
+    a.add_argument('to')
+    return a
+
+
 def main(argv=None):
+    argparser = make_argparser()
     if argv is None:
         argv = sys.argv[1:]
-    module_path = argv[0]
-    path = argv[1]
+    args = argparser.parse_args(argv)
+    module_path = args.fromx
+    path = args.to
 
+    if args.rm:
+        shutil.rmtree(path)
     os.mkdir(path)
 
     os.system('cp ' + module_path + ' ' + path)
