@@ -6,7 +6,7 @@ import imp
 import os
 import shutil
 import re
-import meercat
+from . import meercat
 
 
 def make_argparser():

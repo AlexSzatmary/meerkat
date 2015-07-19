@@ -15,11 +15,11 @@ def combine(*args):
 
 
 def get_L_tup(module):
-    return map(tuple, combine(*module.L_variables))
+    return list(map(tuple, combine(*module.L_variables)))
 
 
 def get_L_job_name(module):
-    return map(lambda tup: module.job_name(*tup), module.L_tup)
+    return [module.job_name(*tup) for tup in module.L_tup]
 
 
 def pre_load(module):
@@ -42,5 +42,5 @@ def load(module_path, suffix=None):
     for (jn, tup) in zip(module.L_job_name, module.L_tup):
         with open(os.path.join(module.batch_dir, jn + suffix)) as hin:
             module.d_runs[tup] = pickle.load(hin)
-    module.L_runs = map(lambda tup: module.d_runs[tup], module.L_tup)
+    module.L_runs = [module.d_runs[tup] for tup in module.L_tup]
     return module

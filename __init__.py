@@ -1,1 +1,1 @@
-from meercat import *
+from .meercat import *
