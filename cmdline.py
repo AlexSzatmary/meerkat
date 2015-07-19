@@ -6,7 +6,7 @@ import imp
 import os
 import shutil
 import re
-from . import meercat
+from . import meerkat
 
 
 def make_argparser():
@@ -33,7 +33,7 @@ def main(argv=None):
     with open(module_path) as hin:
         L_copy = []
         for line in hin.readlines():
-            m = re.match('#meercat-copy (.*)', line[:-1])
+            m = re.match('#meerkat-copy (.*)', line[:-1])
             if m is not None:
                 L_copy.append(m.group(1))
     os.system('cp -R ' + ' '.join(L_copy) + ' ' + path)
@@ -49,7 +49,7 @@ def main(argv=None):
     os.chdir(path)
 #    os.chdir(home)
 
-    meercat.pre_load(module)
+    meerkat.pre_load(module)
     for tup in module.L_tup:
         module.setup(*tup)
 
