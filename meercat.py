@@ -1,5 +1,4 @@
 import os
-import cloud.serialization.cloudpickle as cloudpickle
 import pickle
 import imp
 import sys
@@ -40,7 +39,7 @@ def load(module_path, suffix=None):
     pre_load(module)
     module.d_runs = {}
     for (jn, tup) in zip(module.L_job_name, module.L_tup):
-        with open(os.path.join(module.batch_dir, jn + suffix)) as hin:
+        with open(os.path.join(module.batch_dir, jn + suffix), 'rb') as hin:
             module.d_runs[tup] = pickle.load(hin)
     module.L_runs = [module.d_runs[tup] for tup in module.L_tup]
     return module
