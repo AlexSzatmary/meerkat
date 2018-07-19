@@ -33,7 +33,7 @@ def main(argv=None):
     with open(module_path) as hin:
         L_copy = []
         for line in hin.readlines():
-            m = re.match('#meerkat-copy (.*)', line[:-1])
+            m = re.match('.*#meerkat-copy (.*)', line[:-1])
             if m is not None:
                 L_copy.append(m.group(1))
     os.system('cp -R ' + ' '.join(L_copy) + ' ' + path)
