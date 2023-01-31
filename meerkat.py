@@ -42,4 +42,5 @@ def load(module_path, suffix=None):
         with open(os.path.join(module.batch_dir, jn + suffix), 'rb') as hin:
             module.d_runs[tup] = pickle.load(hin)
     module.L_runs = [module.d_runs[tup] for tup in module.L_tup]
+    sys.path = sys.path[1:]
     return module
